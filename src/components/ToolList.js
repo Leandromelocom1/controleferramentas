@@ -1,59 +1,38 @@
-// src/components/ToolList.js
 import React from 'react';
 import axios from 'axios';
 
 const ToolList = ({ tools, setTools, refreshTools }) => {
   const handleRemove = async (id) => {
     try {
-      await axios.patch(`http://192.168.0.78:5000/tools/${id}`, { status: 'Baixada' }); // Substitua 192.168.1.x pelo endereço IP da sua máquina
-      setTools(tools.filter(tool => tool._id !== id));
+      await axios.patch(`http://192.168.254.108:5000/tools/${id}`, { status: 'Baixada' }); // Substitua pelo endereço IP da sua máquina
       refreshTools();
     } catch (error) {
-      console.error("Erro ao atualizar a ferramenta", error);
+      console.error("Erro ao dar baixa na ferramenta", error);
     }
   };
 
-  const handleDefectAndRemove = async (id) => {
+  const handleDefect = async (id) => {
     try {
-      await axios.patch(`http://192.168.0.78:5000/tools/${id}`, { status: 'Defeito' }); // Substitua 192.168.1.x pelo endereço IP da sua máquina
-      setTools(tools.filter(tool => tool._id !== id));
+      await axios.patch(`http://192.168.254.108:5000/tools/${id}`, { status: 'Defeito' }); // Substitua pelo endereço IP da sua máquina
       refreshTools();
     } catch (error) {
-      console.error("Erro ao atualizar a ferramenta", error);
+      console.error("Erro ao marcar a ferramenta como defeituosa", error);
     }
   };
 
   return (
-    <div>
-      <table id="tools-table" style={{ display: 'none' }}>
-        <thead>
-          <tr>
-            <th>Nome da Ferramenta</th>
-            <th>Liberado por</th>
-            <th>Funcionário</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tools.map((tool) => (
-            <tr key={tool._id}>
-              <td>{tool.toolName}</td>
-              <td>{tool.responsible}</td>
-              <td>{tool.employee}</td>
-              <td>{tool.status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <ul>
-        {tools.map((tool) => (
-          <li key={tool._id}>
+    <div className="tool-list-container">
+      <h2>Lista de Ferramentas</h2>
+      <ul className="tool-list">
+        {tools.map(tool => (
+          <li key={tool._id} className="tool-item">
             <strong>Ferramenta:</strong> {tool.toolName} <br />
-            <strong>Liberado por:</strong> {tool.responsible} <br />
+            <strong>Descrição:</strong> {tool.responsible} <br />
             <strong>Funcionário:</strong> {tool.employee} <br />
+            <strong>N° Série:</strong> {tool.serialNumber} <br />
             <strong>Status:</strong> {tool.status} <br />
-            <button onClick={() => handleRemove(tool._id)}>Dar Baixa</button>
-            <button onClick={() => handleDefectAndRemove(tool._id)}>Devolução com defeito</button>
+            <button onClick={() => handleRemove(tool._id)} className="btn btn-remove">Dar Baixa</button>
+            <button onClick={() => handleDefect(tool._id)} className="btn btn-defect">Baixa com Defeito</button>
           </li>
         ))}
       </ul>

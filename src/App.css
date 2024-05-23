@@ -1,70 +1,232 @@
-/* src/App.css */
+/* src/index.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #02070e;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
 .App {
   text-align: center;
-  margin: 20px;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #444;
 }
 
 form {
   margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 input {
-  margin: 5px;
-  padding: 8px;
+  margin: 10px 0;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 80px;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin: 5px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
-ul {
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ddd;
+}
+
+.logoff {
+  background-color: #dc3545;
+}
+
+.logoff:hover {
+  background-color: #c82333;
+}
+
+.user-list, .tool-list {
   list-style-type: none;
   padding: 0;
 }
 
-li {
-  background-color: #aca3a3;
+.user-item, .tool-item {
+  background-color: #fff;
   margin: 10px 0;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .btn {
   padding: 10px 20px;
-  background-color: #007BFF;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #218838;
 }
 
-form div {
+.permissions-input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.reports-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.report-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.report-results h2 {
+  color: #444;
+  margin-top: 20px;
+}
+
+.tool-form .form-group {
+  margin-bottom: 15px;
+}
+
+.tool-list-container, .maintenance-container, .stock-container, .user-management-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.tool-list-container h2, .maintenance-container h1, .stock-container h1, .user-management-container h1 {
+  color: #444;
+}
+
+.tool-list, .user-list {
+  padding-left: 0;
+}
+
+.tool-item, .user-item {
+  list-style: none;
   margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo adicional para o botão de logoff */
-button.logoff {
-  background-color: #FF6347;
+.btn-status {
+  margin-right: 10px;
 }
 
-button.logoff:hover {
-  background-color: #FF4500;
+.btn-remove {
+  background-color: #dc3545;
+}
+
+.btn-remove:hover {
+  background-color: #c82333;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .login-box {
+    padding: 15px;
+  }
+
+  button {
+    padding: 10px 15px;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  nav a {
+    margin: 10px 0;
+  }
+
+  .report-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .report-buttons button {
+    margin-bottom: 10px;
+  }
 }
