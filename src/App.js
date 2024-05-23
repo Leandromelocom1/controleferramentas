@@ -1,25 +1,56 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ToolForm from './components/ToolForm';
+import ToolList from './components/ToolList';
+import ToolFilter from './components/ToolFilter';
+import Login from './components/Login';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [tools, setTools] = useState([]);
+  const [filteredTools, setFilteredTools] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const fetchTools = async (status = 'Todas') => {
+    try {
+      const response = await axios.get('http://192.168.0.78:5000/tools', { params: { status } }); // Substitua 192.168.1.x pelo endereço IP da sua máquina
+      setTools(response.data);
+      setFilteredTools(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar as ferramentas", error);
+    }
+  };
+
+  const filterTools = (status) => {
+    fetchTools(status);
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchTools();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isAuthenticated ? (
+        <>
+          <h1>Gerenciador de Ferramentas</h1>
+          <button onClick={handleLogout} className="logoff">Logoff</button>
+          <ToolForm refreshTools={() => fetchTools()} />
+          <ToolFilter filterTools={filterTools} />
+          <ToolList tools={filteredTools} setTools={setFilteredTools} refreshTools={() => fetchTools()} />
+        </>
+      ) : (
+        <Login onLogin={setIsAuthenticated} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
